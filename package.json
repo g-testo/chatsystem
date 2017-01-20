@@ -4,6 +4,7 @@
   "description": "node.js/socket.io chat app",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.16.0",
     "bootstrap": "^3.3.7",
     "bower": "~1.2.8",
     "ejs": "~0.8.5",

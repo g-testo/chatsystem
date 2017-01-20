@@ -6,6 +6,7 @@ var io 				= require("socket.io").listen(server)
 var npid 			= require("npid");
 var uuid 			= require('node-uuid');
 var Room 			= require('./room.js');
+var bodyParser      = require('body-parser');
 var _ 				= require('underscore')._;
 
 // var express = require('express')
@@ -21,13 +22,11 @@ app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 3000);
 app.use(express.static(__dirname + '/public'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/js', express.static(__dirname + '/js'));
-app.use('/icons', express.static(__dirname + '/icons'));
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
 
 app.configure(function() {
-	app.use(express.bodyParser());
 	app.use(express.methodOverride());
 	/* Store process-id (as priviledged user) */
 	try {
