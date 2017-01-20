@@ -1,0 +1,33 @@
+{
+  "name": "chat",
+  "version": "0.0.1",
+  "description": "node.js/socket.io chat app",
+  "main": "server.js",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "bower": "~1.2.8",
+    "ejs": "~0.8.5",
+    "express": "~3.4.8",
+    "jquery": "^3.1.1",
+    "node-uuid": "~1.4.1",
+    "nodemon": "~1.0.13",
+    "npid": "~0.4.0",
+    "shrinkwrap": "~0.0.3",
+    "socket.io": "~0.9.16",
+    "underscore": "~1.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/satrapade/advanced-chat.git"
+  },
+  "author": "Tamas Piros",
+  "url": "http://tamas.io",
+  "email": "me@tamas.io",
+  "license": "free",
+  "bugs": {
+    "url": "https://github.com/satrapade/advanced-chat/issues"
+  },
+  "homepage": "https://github.com/satrapade/advanced-chat"
+}
