@@ -10,7 +10,6 @@
     "express": "~3.4.8",
     "jquery": "^3.1.1",
     "node-uuid": "~1.4.1",
-    "nodemon": "~1.0.13",
     "npid": "~0.4.0",
     "shrinkwrap": "~0.0.3",
     "socket.io": "~0.9.16",

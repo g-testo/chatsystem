@@ -4,53 +4,53 @@
 */
 
 //WebSpeech API
-var final_transcript = '';
-var recognizing = false;
-var last10messages = []; //to be populated later
-
-if (!('webkitSpeechRecognition' in window)) {
-  console.log("webkitSpeechRecognition is not available");
-} else {
-  var recognition = new webkitSpeechRecognition();
-  recognition.continuous = true;
-  recognition.interimResults = true;
-
-  recognition.onstart = function() {
-    recognizing = true;
-  };
-
-  recognition.onresult = function(event) {
-    var interim_transcript = '';
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
-      if (event.results[i].isFinal) {
-        final_transcript += event.results[i][0].transcript;
-        $('#msg').addClass("final");
-        $('#msg').removeClass("interim");
-      } else {
-        interim_transcript += event.results[i][0].transcript;
-        $("#msg").val(interim_transcript);
-        $('#msg').addClass("interim");
-        $('#msg').removeClass("final");
-      }
-    }
-    $("#msg").val(final_transcript);
-    };
-  }
-
-  function startButton(event) {
-    if (recognizing) {
-      recognition.stop();
-      recognizing = false;
-      $("#start_button").prop("value", "Record");
-      return;
-    }
-    final_transcript = '';
-    recognition.lang = "en-GB"
-    recognition.start();
-    $("#start_button").prop("value", "Recording ... Click to stop.");
-    $("#msg").val();
-  }
-//end of WebSpeech
+// var final_transcript = '';
+// var recognizing = false;
+// var last10messages = []; //to be populated later
+//
+// if (!('webkitSpeechRecognition' in window)) {
+//   console.log("webkitSpeechRecognition is not available");
+// } else {
+//   var recognition = new webkitSpeechRecognition();
+//   recognition.continuous = true;
+//   recognition.interimResults = true;
+//
+//   recognition.onstart = function() {
+//     recognizing = true;
+//   };
+//
+//   recognition.onresult = function(event) {
+//     var interim_transcript = '';
+//     for (var i = event.resultIndex; i < event.results.length; ++i) {
+//       if (event.results[i].isFinal) {
+//         final_transcript += event.results[i][0].transcript;
+//         $('#msg').addClass("final");
+//         $('#msg').removeClass("interim");
+//       } else {
+//         interim_transcript += event.results[i][0].transcript;
+//         $("#msg").val(interim_transcript);
+//         $('#msg').addClass("interim");
+//         $('#msg').removeClass("final");
+//       }
+//     }
+//     $("#msg").val(final_transcript);
+//     };
+//   }
+//
+//   function startButton(event) {
+//     if (recognizing) {
+//       recognition.stop();
+//       recognizing = false;
+//       $("#start_button").prop("value", "Record");
+//       return;
+//     }
+//     final_transcript = '';
+//     recognition.lang = "en-GB"
+//     recognition.start();
+//     $("#start_button").prop("value", "Recording ... Click to stop.");
+//     $("#msg").val();
+//   }
+// //end of WebSpeech
 
 /*
 Functions
@@ -97,8 +97,8 @@ $(document).ready(function() {
   $("#main-chat-screen").hide();
   $("#errors").hide();
   $("#name").focus();
-  $("#join").attr('disabled', 'disabled'); 
-  
+  $("#join").attr('disabled', 'disabled');
+
   if ($("#name").val() === "") {
     $("#join").attr('disabled', 'disabled');
   }
@@ -125,7 +125,7 @@ $(document).ready(function() {
   $("#name").keypress(function(e){
     var name = $("#name").val();
     if(name.length < 2) {
-      $("#join").attr('disabled', 'disabled'); 
+      $("#join").attr('disabled', 'disabled');
     } else {
       $("#errors").empty();
       $("#errors").hide();
@@ -211,7 +211,7 @@ $(document).ready(function() {
           $("#errors").empty();
           $("#errors").show();
           $("#errors").append("Room <i>" + roomName + "</i> already exists");
-        } else {      
+        } else {
         if (roomName.length > 0) { //also check for roomname
           socket.emit("createRoom", roomName);
           $("#errors").empty();
@@ -232,7 +232,7 @@ $(document).ready(function() {
     var roomID = $(this).attr("id");
     socket.emit("removeRoom", roomID);
     $("#createRoom").show();
-  }); 
+  });
 
   $("#leave").click(function() {
     var roomID = myRoomID;
@@ -264,7 +264,7 @@ $(document).ready(function() {
               $(this).prev('.tt-hint').addClass('hint-lg');
         });
       });
-      
+
       console.log(peopleOnline);
     } else {
       console.log('remove typeahead');
@@ -303,32 +303,32 @@ socket.on("exists", function(data) {
     toggleChatWindow();
 });
 
-socket.on("joined", function() {
-  $("#errors").hide();
-  if (navigator.geolocation) { //get lat lon of user
-    navigator.geolocation.getCurrentPosition(positionSuccess, positionError, { enableHighAccuracy: true });
-  } else {
-    $("#errors").show();
-    $("#errors").append("Your browser is ancient and it doesn't support GeoLocation.");
-  }
-  function positionError(e) {
-    console.log(e);
-  }
-
-  function positionSuccess(position) {
-    var lat = position.coords.latitude;
-    var lon = position.coords.longitude;
-    //consult the yahoo service
-    $.ajax({
-      type: "GET",
-      url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.placefinder%20where%20text%3D%22"+lat+"%2C"+lon+"%22%20and%20gflags%3D%22R%22&format=json",
-      dataType: "json",
-       success: function(data) {
-        socket.emit("countryUpdate", {country: data.query.results.Result.countrycode});
-      }
-    });
-  }
-});
+// socket.on("joined", function() {
+//   $("#errors").hide();
+//   if (navigator.geolocation) { //get lat lon of user
+//     navigator.geolocation.getCurrentPosition(positionSuccess, positionError, { enableHighAccuracy: true });
+//   } else {
+//     $("#errors").show();
+//     $("#errors").append("Your browser is ancient and it doesn't support GeoLocation.");
+//   }
+//   function positionError(e) {
+//     console.log(e);
+//   }
+//
+//   function positionSuccess(position) {
+//     var lat = position.coords.latitude;
+//     var lon = position.coords.longitude;
+//     //consult the yahoo service
+//     $.ajax({
+//       type: "GET",
+//       url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.placefinder%20where%20text%3D%22"+lat+"%2C"+lon+"%22%20and%20gflags%3D%22R%22&format=json",
+//       dataType: "json",
+//        success: function(data) {
+//         socket.emit("countryUpdate", {country: data.query.results.Result.countrycode});
+//       }
+//     });
+//   }
+// });
 
 socket.on("history", function(data) {
   if (data.length !== 0) {
@@ -390,7 +390,7 @@ socket.on("history", function(data) {
   socket.on("roomList", function(data) {
     $("#rooms").text("");
     $("#rooms").append("<li class=\"list-group-item active\">List of rooms <span class=\"badge\">"+data.count+"</span></li>");
-     if (!jQuery.isEmptyObject(data.rooms)) { 
+     if (!jQuery.isEmptyObject(data.rooms)) {
       $.each(data.rooms, function(id, room) {
         var html = "<button id="+id+" class='joinRoomBtn btn btn-default btn-xs' >Join</button>" + " " + "<button id="+id+" class='removeRoomBtn btn btn-default btn-xs'>Remove</button>";
         $('#rooms').append("<li id="+id+" class=\"list-group-item\"><span>" + room.name + "</span> " + html + "</li>");
